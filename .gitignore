@@ -1,0 +1,106 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ----------------------------
+# Python bytecode & caches
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ----------------------------
+# Virtual environments
+# ----------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# ----------------------------
+# Environment variables
+# ----------------------------
+.env
+.env.*
+!.env.example
+
+# ----------------------------
+# Dependency artifacts
+# ----------------------------
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# ----------------------------
+# uv / pip tools
+# ----------------------------
+# Keep uv.lock (DO NOT ignore)
+# Ignore local uv state if any
+.uv/
+
+# ----------------------------
+# Logs
+# ----------------------------
+*.log
+logs/
+
+# ----------------------------
+# Databases & local state
+# ----------------------------
+*.sqlite3
+*.db
+
+# ----------------------------
+# OS files
+# ----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----------------------------
+# Editor / IDE
+# ----------------------------
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.swp
+
+# ----------------------------
+# Coverage / reports
+# ----------------------------
+.coverage
+coverage.xml
+htmlcov/
+
+# ----------------------------
+# Docker
+# ----------------------------
+*.pid
