@@ -10,6 +10,42 @@ const App = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
+  const analyzeResume = async() => {
+    if(!resumeText || !jdText){
+      setError("Please provide both resume and job description.")
+      return
+    }
+    setLoading(true)
+    setError(null)
+    setResult(null)
+
+    try{
+      const response = await fetch("http://localhost:8000/analyze",{
+        method: "POST",
+        headers: {
+          "Content-Type":"application/json",
+        },
+        body: JSON.stringify({
+          resume_text: resumeText,
+          jd_text: jdText  
+        })
+      })
+
+      if(!response.ok){
+        throw new Error("Backend error")
+      }
+
+      const data = await response.json()
+      setResult(data) 
+    }
+    catch(error){
+      setError("Failed to analyze resume.")
+    }
+    finally{
+      setLoading(false)
+    }
+  }
+
   return (
     <div className='min-h-screen bg-gray-100 px-6 py-10'>
       <div className='max-w-4xl mx-auto bg-white p-8 rounded-lg shadow'>
@@ -78,6 +114,7 @@ const App = () => {
 
         <div className='mt-6'>
           <button
+            onClick={analyzeResume}
             className='w-full bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 disabled:bg-gray-400'
             disabled={loading}
           >
