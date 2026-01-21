@@ -6,4 +6,6 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.128.0",
+    "scikit-learn>=1.8.0",
+    "sentence-transformers>=5.2.0",
 ]

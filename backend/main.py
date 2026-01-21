@@ -1,6 +1,25 @@
-def main():
-    print("Hello from backend!")
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from api.analyze import router as analyze_router
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-if __name__ == "__main__":
-    main()
+FRONTEND_URI = os.getenv("FRONTEND_URI")
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[FRONTEND_URI],
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
+app.include_router(analyze_router)
+
+@app.get("/health")
+def health():
+    return {"status":"ok"}
+
