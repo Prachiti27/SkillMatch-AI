@@ -11,8 +11,8 @@ const App = () => {
   const [error, setError] = useState(null)
 
   const analyzeResume = async() => {
-    if(!resumeText || !jdText){
-      setError("Please provide both resume and job description.")
+    if(!jdText){
+      setError("Job description is required.")
       return
     }
     setLoading(true)
@@ -20,25 +20,37 @@ const App = () => {
     setResult(null)
 
     try{
-      const response = await fetch("http://localhost:8000/analyze",{
-        method: "POST",
-        headers: {
-          "Content-Type":"application/json",
-        },
-        body: JSON.stringify({
-          resume_text: resumeText,
-          jd_text: jdText  
+      let response 
+
+      if(resumeMode==="text"){
+        response = await fetch("http://localhost:8000/analyze",{
+          methos: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({
+            resume_text: resumeText,
+            jd_text: jdText  
+          })
         })
-      })
+      }
+      else{
+        const formData = new FormData()
+        formData.append("resume", resumeFile)
+        formData.append("jd_text",jdText)
+
+        response = await fetch("http://localhost:8000/analyzepdf",{
+          method: "POST",
+          body: formData 
+        })
+      }
 
       if(!response.ok){
         throw new Error("Backend error")
       }
 
       const data = await response.json()
-      setResult(data) 
+      setResult(data)
     }
-    catch(error){
+    catch{
       setError("Failed to analyze resume.")
     }
     finally{
